@@ -1,6 +1,6 @@
 //
 //  transform.hpp
-//  Animera
+//  Graphics
 //
 //  Created by Indi Kernick on 6/9/19.
 //  Copyright © 2019 Indi Kernick. All rights reserved.

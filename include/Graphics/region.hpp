@@ -1,6 +1,6 @@
 //
 //  region.hpp
-//  Animera
+//  Graphics
 //
 //  Created by Indi Kernick on 8/9/19.
 //  Copyright © 2019 Indi Kernick. All rights reserved.

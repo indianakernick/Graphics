@@ -1,6 +1,6 @@
 //
 //  compare.hpp
-//  Animera
+//  Graphics
 //
 //  Created by Indi Kernick on 24/1/20.
 //  Copyright © 2020 Indi Kernick. All rights reserved.
