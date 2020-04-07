@@ -2,8 +2,8 @@
 //  compare.hpp
 //  Graphics
 //
-//  Created by Indi Kernick on 24/1/20.
-//  Copyright © 2020 Indi Kernick. All rights reserved.
+//  Created by Indiana Kernick on 24/1/20.
+//  Copyright © 2020 Indiana Kernick. All rights reserved.
 //
 
 #ifndef graphics_compare_hpp
