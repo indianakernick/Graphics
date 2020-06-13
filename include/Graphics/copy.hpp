@@ -51,6 +51,38 @@ void overCopy(
   std::memcpy(dst.data(), src.data(), dst.wholeByteSize());
 }
 
+template <typename Pixel>
+void patternCopy(
+  const gfx::Surface<Pixel> dst, 
+  const gfx::CSurface<gfx::identity_t<Pixel>> pat,
+  Point patPos = {0, 0}
+) noexcept {
+  patPos.x %= pat.width();
+  patPos.y %= pat.height();
+  if (patPos.x < 0) patPos.x += pat.width();
+  if (patPos.y < 0) patPos.y += pat.height();
+
+  const auto patRowBeg = gfx::begin(pat);
+  const auto patRowEnd = gfx::end(pat);
+  auto patRowIter = patRowBeg + patPos.y;
+  
+  for (auto dstRow : dst) {
+    const Pixel *const patColBeg = patRowIter.begin();
+    const Pixel *const patColEnd = patRowIter.end();
+    const Pixel *patColIter = patColBeg + patPos.x;
+    
+    for (Pixel &dstPixel : dstRow) {
+      dstPixel = *patColIter;
+      
+      ++patColIter;
+      if (patColIter == patColEnd) patColIter = patColBeg;
+    }
+    
+    ++patRowIter;
+    if (patRowIter == patRowEnd) patRowIter = patRowBeg;
+  }
+}
+
 }
 
 #endif

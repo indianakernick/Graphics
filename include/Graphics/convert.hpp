@@ -29,24 +29,24 @@ Surface<std::uint8_t> convertToMono(const Surface<Pixel<Format>> src) noexcept {
   const int extraBits = src.width() % 8;
   
   for (std::uint8_t *dstRowIter = dst.data(); dstRowIter != dstRowEnd; dstRowIter += dst.pitch()) {
-    std::uint8_t *dstPixelIter = dstRowIter;
-    const auto *srcPixelIter = reinterpret_cast<Pixel<Format> *>(dstPixelIter);
-    std::uint8_t *const dstPixelEnd = dstPixelIter + width;
+    std::uint8_t *dstColIter = dstRowIter;
+    const auto *srcColIter = reinterpret_cast<Pixel<Format> *>(dstColIter);
+    std::uint8_t *const dstPixelEnd = dstColIter + width;
     
-    const auto fillByte = [&srcPixelIter](const int bits) {
+    const auto fillByte = [&srcColIter](const int bits) {
       std::uint8_t combinedPixel = 0;
       for (int i = 7; i > 7 - bits; --i) {
-        const std::uint8_t gray = Format::color(*srcPixelIter++).r;
+        const std::uint8_t gray = Format::color(*srcColIter++).r;
         combinedPixel |= (gray < Threshold ? 0 : 1) << i;
       }
       return combinedPixel;
     };
     
-    while (dstPixelIter != dstPixelEnd) {
-      *dstPixelIter++ = fillByte(8);
+    while (dstColIter != dstPixelEnd) {
+      *dstColIter++ = fillByte(8);
     }
     if (extraBits) {
-      *dstPixelIter = fillByte(extraBits);
+      *dstColIter = fillByte(extraBits);
     }
   }
   
@@ -71,9 +71,9 @@ Surface<Pixel<DstFormat>> convertInplace(
   };
   
   for (auto dstRow : range(dst)) {
-    const auto *srcPixelIter = reinterpret_cast<SrcPixel *>(dstRow.begin());
+    const auto *srcColIter = reinterpret_cast<SrcPixel *>(dstRow.begin());
     for (DstPixel &dstPixel : dstRow) {
-      dstPixel = dstFmt.pixel(srcFmt.color(*srcPixelIter++));
+      dstPixel = dstFmt.pixel(srcFmt.color(*srcColIter++));
     }
   }
   

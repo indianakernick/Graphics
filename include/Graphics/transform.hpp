@@ -19,10 +19,10 @@ void flipHori(Surface<Pixel> dst, CSurface<identity_t<Pixel>> src, Func func) no
   assert(dst.size() == src.size());
   auto srcRowIter = begin(src);
   for (auto dstRow : range(dst)) {
-    const Pixel *srcPixelIter = srcRowIter.end();
+    const Pixel *srcColIter = srcRowIter.end();
     for (Pixel &dstPixel : dstRow) {
-      --srcPixelIter;
-      func(dstPixel, *srcPixelIter);
+      --srcColIter;
+      func(dstPixel, *srcColIter);
     }
     ++srcRowIter;
   }
@@ -39,10 +39,10 @@ void flipVert(Surface<Pixel> dst, CSurface<identity_t<Pixel>> src, Func func) no
   auto srcRowIter = end(src);
   for (auto dstRow : range(dst)) {
     --srcRowIter;
-    const Pixel *srcPixelIter = srcRowIter.begin();
+    const Pixel *srcColIter = srcRowIter.begin();
     for (Pixel &dstPixel : dstRow) {
-      func(dstPixel, *srcPixelIter);
-      ++srcPixelIter;
+      func(dstPixel, *srcColIter);
+      ++srcColIter;
     }
   }
 }
@@ -82,10 +82,10 @@ void rotate2(Surface<Pixel> dst, CSurface<identity_t<Pixel>> src, Func func) noe
   auto srcRowIter = end(src);
   for (auto dstRow : range(dst)) {
     --srcRowIter;
-    const Pixel *srcPixelIter = srcRowIter.end();
+    const Pixel *srcColIter = srcRowIter.end();
     for (Pixel &dstPixel : dstRow) {
-      --srcPixelIter;
-      func(dstPixel, *srcPixelIter);
+      --srcColIter;
+      func(dstPixel, *srcColIter);
     }
   }
 }
