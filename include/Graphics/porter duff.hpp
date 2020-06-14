@@ -50,12 +50,12 @@ inline Color porterDuff(const Factor f, const Color a, const Color b) noexcept {
 // Using a lambda to encourage inlining
 #define MODE(NAME, FACTOR_A, FACTOR_B)                                          \
   constexpr auto mode_##NAME = [](                                              \
-    [[maybe_unused]] const std::uint8_t a,                                           \
-    [[maybe_unused]] const std::uint8_t b                                            \
+    [[maybe_unused]] const std::uint8_t a,                                      \
+    [[maybe_unused]] const std::uint8_t b                                       \
   ) noexcept {                                                                  \
     return Factor{                                                              \
-      static_cast<std::uint8_t>(FACTOR_A),                                           \
-      static_cast<std::uint8_t>(FACTOR_B)                                            \
+      static_cast<std::uint8_t>(FACTOR_A),                                      \
+      static_cast<std::uint8_t>(FACTOR_B)                                       \
     };                                                                          \
   }
 
