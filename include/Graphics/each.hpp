@@ -85,7 +85,7 @@ bool eachRegion(
 }
 
 template <typename DstPixel, typename SrcPixel, typename Func>
-void pureEach(Surface<DstPixel> dst, CSurface<SrcPixel> src, Func func) {
+void transform(Surface<DstPixel> dst, CSurface<SrcPixel> src, Func func) {
   each(dst, src, [func](DstPixel &dst, const SrcPixel &src) {
     dst = func(src);
   });

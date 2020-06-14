@@ -81,7 +81,6 @@ struct YA {
   static constexpr Color color(const Pixel pixel) noexcept {
     return {gray(pixel), gray(pixel), gray(pixel), alpha(pixel)};
   }
-  
   static constexpr Pixel pixel(const Color color) noexcept {
     return (color.a << 8) | color.r;
   }
