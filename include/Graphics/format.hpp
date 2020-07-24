@@ -15,6 +15,42 @@ namespace gfx {
 
 // TODO: fixed order pixel formats
 
+struct ABGR {
+  using Pixel = std::uint32_t;
+  
+  static constexpr std::uint8_t red(const Pixel pixel) noexcept {
+    return pixel & 0xFF;
+  }
+  static constexpr std::uint8_t green(const Pixel pixel) noexcept {
+    return (pixel >> 8) & 0xFF;
+  }
+  static constexpr std::uint8_t blue(const Pixel pixel) noexcept {
+    return (pixel >> 16) & 0xFF;
+  }
+  static constexpr std::uint8_t alpha(const Pixel pixel) noexcept {
+    return pixel >> 24;
+  }
+  
+  static constexpr Pixel pixel(const int r, const int g, const int b, const int a = 255) noexcept {
+    return pixel({
+      static_cast<std::uint8_t>(r),
+      static_cast<std::uint8_t>(g),
+      static_cast<std::uint8_t>(b),
+      static_cast<std::uint8_t>(a)
+    });
+  }
+  
+  static constexpr Color color(const Pixel pixel) noexcept {
+    return {red(pixel), green(pixel), blue(pixel), alpha(pixel)};
+  }
+  static constexpr Pixel pixel(const Color color) noexcept {
+    return (Pixel{color.a} << 24) |
+           (Pixel{color.b} << 16) |
+           (Pixel{color.g} <<  8) |
+            Pixel{color.r};
+  }
+};
+
 struct ARGB {
   using Pixel = std::uint32_t;
 
