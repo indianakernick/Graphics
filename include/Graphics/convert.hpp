@@ -59,6 +59,10 @@ Surface<Pixel<DstFormat>> convertInplace(
   DstFormat dstFmt,
   SrcFormat srcFmt
 ) noexcept {
+  if constexpr (std::is_same_v<DstFormat, SrcFormat>) {
+    return src;
+  }
+
   using SrcPixel = Pixel<SrcFormat>;
   using DstPixel = Pixel<DstFormat>;
   static_assert(sizeof(DstPixel) <= sizeof(SrcPixel));
